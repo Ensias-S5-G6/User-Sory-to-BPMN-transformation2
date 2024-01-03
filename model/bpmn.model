@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<BPMN:Definition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BPMN="http://www.example.org/uS2BPMN/BPMN">
+  <pools name="Customer" process="//@pools.1"/>
+  <pools xsi:type="BPMN:Process" id="3" name="3">
+    <activities name="Send credit request "/>
+    <activities name="Receive the confirmation message "/>
+    <transitions name="1-2" to="//@pools.3/@activities.0" from="//@pools.1/@activities.0"/>
+  </pools>
+  <pools name="Seller" process="//@pools.3"/>
+  <pools xsi:type="BPMN:Process" id="2" name="2">
+    <activities name="Review the request"/>
+    <transitions name="2-3" to="//@pools.1/@activities.1" from="//@pools.3/@activities.0"/>
+  </pools>
+</BPMN:Definition>
