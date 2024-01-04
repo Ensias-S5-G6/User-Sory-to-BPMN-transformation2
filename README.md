@@ -13,7 +13,7 @@ This project utilizes a well-defined metamodel to represent user stories, a fund
 The User Story Metamodel serves as a structured framework, capturing essential elements such as roles, tasks, values, and acceptance criteria.
 
 
-![user story metamodel ](/main/readme/userStoryMM.png)
+![user story metamodel ](readme/userStoryMM.png)
 ## BPMN Metamodel
 
 The BPMN Metamodel, a key aspect of this project, provides a standardized and comprehensive structure for
@@ -22,7 +22,7 @@ The BPMN Metamodel, a key aspect of this project, provides a standardized and co
  translation of user stories into BPMN models.
 
 
- ![BPMN metamodel ](/main/readme/BPMNMetamodel.jpeg)
+ ![BPMN metamodel ](readme/BPMNMetamodel.jpeg)
 ## transformation demo 
 
 
