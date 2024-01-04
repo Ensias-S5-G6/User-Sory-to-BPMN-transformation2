@@ -22,7 +22,7 @@ The BPMN Metamodel, a key aspect of this project, provides a standardized and co
  translation of user stories into BPMN models.
 
 
-# ![BPMN metamodel ](/main/readme/BPMNMetamodel.jpeg)
+ ![BPMN metamodel ](/main/readme/BPMNMetamodel.jpeg)
 ## transformation demo 
 
 
