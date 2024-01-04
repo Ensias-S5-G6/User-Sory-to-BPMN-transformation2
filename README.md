@@ -1,28 +1,44 @@
 # User-Story-to-Process-Transformation-MDE
 
-## Overview
-This project aims to facilitate the seamless transformation of user stories into process models using Model Driven Engineering(MDE) principles.
-The primary ouput of this transformation is represented in BPMN providing a standardized and interoperable way to describe business processes.
-
-## Table of Contents
-- Introduction
-- Features
-- Installation
-- Usage
-- Configuration
-- Example
-
 ## Introduction
-In modern software development, understanding and translating user stories into executable processess in curcial. This project leverages Model Driven Engineering techniques to automate the transformation process, saving time and reducing the likelihood of errors in the translation for user stories to process models.
+In contemporary software development, the translation of user stories into executable processes stands as a critical challenge. 
+This project addresses this challenge by leveraging Model Driven Engineering (MDE) principles, aiming to automate the transformation
+ process. The primary goal is to save time and reduce the likelihood of errors when translating user stories into process models.
 
-## Features
-- **User Story Parsing** : Parse user stories written in natural language to extract relevant information.
-- **Model Generation** : Automatically generate process models based on parsed user stories.
+## Problematic
+The translation of user stories to executable process models often involves manual effort, leading to potential errors and inefficiencies.
+ This project seeks to streamline and automate this translation process, enhancing accuracy and productivity in software development.
+## User story Metamodel
+This project utilizes a well-defined metamodel to represent user stories, a fundamental component in software development. 
+The User Story Metamodel serves as a structured framework, capturing essential elements such as roles, tasks, values, and acceptance criteria.
+
+
+![user story metamodel ](/main/readme/userStoryMM.png)
+## BPMN Metamodel
+
+The BPMN Metamodel, a key aspect of this project, provides a standardized and comprehensive structure for
+ representing business processes. It encompasses elements such as activities , process, pool, and transition. 
+ This metamodel serves as the foundation for the transformation process, ensuring accurate and consistent 
+ translation of user stories into BPMN models.
+
+
+# ![BPMN metamodel ](/main/readme/BPMNMetamodel.jpeg)
+## transformation demo 
+
+
+## Contributors
+
+[<img src="https://avatars.githubusercontent.com/u/96293231?v=4" width="50px">](https://github.com/GodWilldev)
+[<img src="https://avatars.githubusercontent.com/u/148327695?v=4" width="50px">](https://github.com/dianeDev224)
+[<img src="https://avatars.githubusercontent.com/u/125375032?v=4" width="50px">](https://github.com/ChaimaaRO)
+[<img src="https://avatars.githubusercontent.com/u/101372554?v=4" width="50px">](https://github.com/houdasam)
 
 ## Installation
 Clone this repository to install the project:
-`git clone https://github.com/Ensias-S5-G6/User-Story-to-Process-Transformation-MDE`
+`git clone https://github.com/Ensias-S5-G6/User-Sory-to-BPMN-transformation2`
 
-
+## Usefull links
+`https://eclipse.dev/epsilon/doc/emc/`
+`https://eclipse.dev/modeling/emf/javadoc/`
 
 

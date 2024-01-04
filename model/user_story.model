@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
-<UserStory:Backlog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:UserStory="http://www.example.org/uS2BPMN/UserStory" xmi:id="_ry0SUKp7Ee6bNK2rc8pr0g">
-  <userStories xmi:id="_ry05YKp7Ee6bNK2rc8pr0g" id="1" next="_ry05ZKp7Ee6bNK2rc8pr0g">
-    <role xmi:id="_ry05Yap7Ee6bNK2rc8pr0g" roleName="Customer"/>
-    <task xmi:id="_ry05Yqp7Ee6bNK2rc8pr0g" description="Send credit request "/>
-    <value xmi:id="_ry05Y6p7Ee6bNK2rc8pr0g" value="send crdit request"/>
-    <acceptanceCriteria xmi:id="_zz1tAKp8Ee6bNK2rc8pr0g" given="given" when="when" then="then"/>
+<UserStory:Backlog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:UserStory="http://www.example.org/uS2BPMN/UserStory" xmi:id="_i5mbYKsqEe6mNcrAiKd1Mg">
+  <userStories xmi:id="_yb-kIKsqEe6mNcrAiKd1Mg" id="1" next="_-TbTQKsqEe6mNcrAiKd1Mg">
+    <role xmi:id="_0NPGYKsqEe6mNcrAiKd1Mg" roleName="Customer"/>
+    <task xmi:id="_200zsKsqEe6mNcrAiKd1Mg" description="Send credit request"/>
+    <value xmi:id="_2JwdcKsqEe6mNcrAiKd1Mg" value="send cerdit request"/>
+    <acceptanceCriteria xmi:id="_7qgJMKsqEe6mNcrAiKd1Mg" given="given" when="when" then="then"/>
   </userStories>
-  <userStories xmi:id="_ry05ZKp7Ee6bNK2rc8pr0g" id="2" next="_ry05aKp7Ee6bNK2rc8pr0g">
-    <role xmi:id="_ry05Zap7Ee6bNK2rc8pr0g" roleName="Seller"/>
-    <task xmi:id="_ry05Zqp7Ee6bNK2rc8pr0g" description="Review the request"/>
-    <value xmi:id="_ry05Z6p7Ee6bNK2rc8pr0g" value="review the request"/>
+  <userStories xmi:id="_-TbTQKsqEe6mNcrAiKd1Mg" id="2" next="_FBkmQKsrEe6mNcrAiKd1Mg">
+    <role xmi:id="__PBY0KsqEe6mNcrAiKd1Mg" roleName="Seller"/>
+    <task xmi:id="_A1Rk8KsrEe6mNcrAiKd1Mg" description="Review the request"/>
+    <value xmi:id="_C1S78KsrEe6mNcrAiKd1Mg" value="review the request"/>
   </userStories>
-  <userStories xmi:id="_ry05aKp7Ee6bNK2rc8pr0g" id="3">
-    <role xmi:id="_ry05aap7Ee6bNK2rc8pr0g" roleName="Customer"/>
-    <task xmi:id="_ry05aqp7Ee6bNK2rc8pr0g" description="Receive the confirmation message "/>
-    <value xmi:id="_ry05a6p7Ee6bNK2rc8pr0g" value="receive the confirmation message"/>
+  <userStories xmi:id="_FBkmQKsrEe6mNcrAiKd1Mg" id="3">
+    <role xmi:id="_GS5rQKsrEe6mNcrAiKd1Mg" roleName="Customer"/>
+    <task xmi:id="_HpOlAKsrEe6mNcrAiKd1Mg" description="Receive the confirmation message"/>
+    <value xmi:id="_KVxq0KsrEe6mNcrAiKd1Mg" value="receive the confirmation message"/>
   </userStories>
 </UserStory:Backlog>
