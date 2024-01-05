@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
 public class MetaModelManipulator {
-	
+	// Attributs pour stocker les informations des méta-modèles et des modèles
 	EPackage MMEpackage ; 
 	EObject MMRacine ; 
 	DynamicEObjectImpl MRacineNode ;
@@ -35,19 +35,19 @@ public class MetaModelManipulator {
 	
 	
 	
-	
+	 // Méthode pour charger un méta-modèle
 	public void loadMetaModel(String uri , String metaModelName) {
 		
-		//declaration des resources 
+		// Création d'une resourceSet
 		ResourceSet resourceSet = new ResourceSetImpl();
 		
-		//obtention des informations
+		// Configuration pour prendre en charge les fichiers avec l'extension "ecore"
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore" , new XMIResourceFactoryImpl());
 		
-		//chargement de la resources
+		//chargement de la resources à partir de l'URI spécifié
 		Resource MMResource = resourceSet.getResource(URI.createURI(uri), true) ; 
 		
-		
+		// Récupération de la racine du méta-modèle
 		this.MMRacine = MMResource.getContents().get(0) ; 
 		
 		 this.MMEpackage = (EPackage) MMRacine ; 
@@ -99,6 +99,8 @@ public class MetaModelManipulator {
 		
 	}
 	
+	
+	// Méthode pour charger un modèle
 	public DynamicEObjectImpl loadModel(String uri) throws IOException {
 		//declaration des resources 
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -109,6 +111,8 @@ public class MetaModelManipulator {
 		//associer un identifiant au model
 		resourceSet.getPackageRegistry().put(this.MMEpackage.getNsURI() , this.MMEpackage);
 		
+		
+		 // Chargement du modèle à partir de l'URI spécifié
 		Resource Mresource = resourceSet.getResource(URI.createURI(uri), true) ;
 		Mresource.load(null);
 		this.MRacineNode = (DynamicEObjectImpl) Mresource.getContents().get(0);	
@@ -132,21 +136,27 @@ public class MetaModelManipulator {
 	
 	
 	public void userStory2BPM(DynamicEObjectImpl userStoryRootNode , String destinationModelPath ) throws IOException {
-		
+		   // Mapping des rôles vers les pools
 		this.mapRoleToPool(userStoryRootNode);
+		
+		 // Mapping des tâches vers les activités
 		this.mapTaskToActivities(userStoryRootNode);
 		System.out.print("activityMap : "+MetaModelManipulator.activitiesTaskMap);
 		System.out.print("roleMap : "+MetaModelManipulator.rolePoolMap);
 		
+		
+		// Récupération de la référence aux user stories dans le modèle source
 		EClass backlog = userStoryRootNode.eClass() ;
 		EReference userStoriesRef = (EReference)backlog.getEStructuralFeature("userStories");
 		EcoreEList<DynamicEObjectImpl> userStories = (EcoreEList)userStoryRootNode.eGet(userStoriesRef);
 		
+		
+		  // Créer une nouvelle resource pour le modèle BPMN
 		ResourceSet resourceSet = new ResourceSetImpl();
 	    resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("model", new XMIResourceFactoryImpl());
         Resource resource = resourceSet.createResource(URI.createURI(destinationModelPath));
 		
-		
+     // Récupérer la référence à la classe "Definition" dans le méta-modèle
         EClass defintionClass = (EClass) this.MMEpackage.getEClassifier("Definition"); 
 		System.out.println("defintion : "+defintionClass);
 		EReference eDefintionPool = (EReference) defintionClass.getEStructuralFeature("pools");
@@ -177,13 +187,13 @@ public class MetaModelManipulator {
 			this.processAcceptanceCriteria(userStoryClass , userStoryRef);
 			
 			
-			//pool instance
+		 // Récupération de l'instance du pool
 			EClass poolClass = (EClass) this.MMEpackage.getEClassifier("Pool"); 
 			EReference ePoolProcess = (EReference) poolClass.getEStructuralFeature("process");
 			EObject poolInstance = MetaModelManipulator.rolePoolMap.get(roleName);
 			
 			
-			//process instance
+			//l'instance du process 
 			EClass processClass = (EClass) this.MMEpackage.getEClassifier("Process"); 
 			EAttribute eProcessIdRef = (EAttribute) processClass.getEStructuralFeature("id");
 			EAttribute eProceNameRef = (EAttribute) processClass.getEStructuralFeature("name");
@@ -194,41 +204,42 @@ public class MetaModelManipulator {
 			List<EObject> eProcessActivities = (List) processInstance.eGet(eProcessActivitiesRef);
 			List<EObject> eProcessTransitions = (List) processInstance.eGet(eProcessTransitionsRef);
 			
-			//activities intance
+			// l'instance du activities 
 			EObject activityInstance = MetaModelManipulator.activitiesTaskMap.get(taskDescription);
 
-			//add activity
+			  // Ajout de l'activité
 			eProcessActivities.add(activityInstance);
 			
-			//add transition
+			//add transition si la tache suivante existe 
 			if(next != null) {
 				eProcessTransitions.add(AddTransition(taskDescription , id , next));
 			}
 			
 			 
-			//add pool to defition
+			// Ajout du pool à la définition
 			System.out.println("process intance : "+eProcessId);
 			defintionPools.add(poolInstance);
 			
-			//add process to pool
+	        // Ajout du processus au pool
 			defintionPools.add(processInstance);
 
 
 		}
 		
-		//add all pools to defition
+		// Ajout de tous les pools à la définition
 		defintionInstance.eSet(eDefintionPool, defintionPools);
 		
-		//add defition node as a root for model
+		// Ajout de l'instance de définition en tant que racine pour le modèle BPMN
 		resource.getContents().add(defintionInstance);
 		
-		
+		  // Sauvegarde du modèle BPMN
 		resource.save(null);
 		System.out.println("#############################################****************###############################################");
 		System.out.println("#############################################*** Transformation done *************##########################");
 		System.out.println("#############################################****************###############################################");
 	}
-	
+
+	 // Méthode pour mapper les tâches aux activités
 	private void mapTaskToActivities(DynamicEObjectImpl userStoryRootNode) {
 		
 		EClass backlog = userStoryRootNode.eClass() ;
@@ -241,20 +252,22 @@ public class MetaModelManipulator {
 			EAttribute idRef = (EAttribute)getAttByName(userStoryRef, "id");
 			String id = String.valueOf(userStoryRef.eGet(idRef));
 			
-			//task
+			 // Récupération de la description de la tâche
 			String taskDescription =  getEclassAttributeValue(userStoryRef , "task" , "description" , String.class);
-				
+			 // Créer  l'instance de l'activité
 			EClass activtyClass = (EClass) this.MMEpackage.getEClassifier("Activity");
 			EAttribute eactivtyId = (EAttribute)activtyClass.getEStructuralFeature("id"); 
 			EAttribute activtyName = (EAttribute) activtyClass.getEStructuralFeature("name"); 
 			EObject activityInstance = this.MMEpackage.getEFactoryInstance().create(activtyClass);
 			activityInstance.eSet(eactivtyId, Integer.valueOf((int) Math.random()));
 			activityInstance.eSet(activtyName, taskDescription);
-			
+			// Stockage de la correspondance rntre les deux 
 			MetaModelManipulator.activitiesTaskMap.put(taskDescription, activityInstance);
 		}
 	}
+
 	
+	// Méthode pour mapper les rôles aux pools
 	private void mapRoleToPool(DynamicEObjectImpl userStoryRootNode) {
 		EClass backlog = userStoryRootNode.eClass() ;
 		EReference userStoriesRef = (EReference)backlog.getEStructuralFeature("userStories");
@@ -265,9 +278,9 @@ public class MetaModelManipulator {
 			EAttribute idRef = (EAttribute)getAttByName(userStoryRef, "id");
 			String id = String.valueOf(userStoryRef.eGet(idRef));
 			
-			//role
+			// Récupération du role name 
 			String roleName =  getEclassAttributeValue(userStoryRef , "role" , "roleName" , String.class);
-				
+          //l'instance du pool
 			EClass poolClass = (EClass) this.MMEpackage.getEClassifier("Pool"); 
 			EAttribute ePoolId = (EAttribute) poolClass.getEStructuralFeature("id");
 			EAttribute ePoolName = (EAttribute) poolClass.getEStructuralFeature("name");
@@ -276,7 +289,7 @@ public class MetaModelManipulator {
 			poolInstance.eSet(ePoolId, Integer.valueOf((int) Math.random()));
 			poolInstance.eSet(ePoolName, roleName);
 			
-			//process intance
+			//l'instance du processus associé au pool
 			EClass processClass = (EClass) this.MMEpackage.getEClassifier("Process"); 
 			EAttribute eProcessId = (EAttribute) processClass.getEStructuralFeature("id");
 			EAttribute eProceName = (EAttribute) processClass.getEStructuralFeature("name");
@@ -291,6 +304,7 @@ public class MetaModelManipulator {
 			
 			poolInstance.eSet(ePoolProcess, processInstance);
 			
+			// Stockage
 			MetaModelManipulator.rolePoolMap.put(roleName, poolInstance);
 		}
 	}
@@ -298,7 +312,7 @@ public class MetaModelManipulator {
 	
 	private EObject AddTransition(String  currTask , Integer currId , DynamicEObjectImpl next ) {
 		
-		//from instance
+		// Récupérer l'instance de l'activité source depuis la map
 		EObject from = MetaModelManipulator.activitiesTaskMap.get(currTask);
 		
 		//next id 
@@ -308,9 +322,10 @@ public class MetaModelManipulator {
 		
 		//next task
 		String nextVal =  getEclassAttributeValue(next , "task" , "description" , String.class);
+		// Récupération de l'instance de l'activité destination
 		EObject to = MetaModelManipulator.activitiesTaskMap.get(nextVal);
 		
-		//transition instance
+		// l'instance de transition 
 		EClass transitionClass = (EClass) this.MMEpackage.getEClassifier("Transition"); 
 		EAttribute transitionId = (EAttribute)transitionClass.getEStructuralFeature("id"); EAttribute
 		transitionName = (EAttribute) transitionClass.getEStructuralFeature("name");
@@ -375,17 +390,17 @@ public class MetaModelManipulator {
 	
 	
 	public static void main(String atgs[]) {
-		//load source meta model
+		// Chargement du méta modèle source
 		MetaModelManipulator metaModelSource = new MetaModelManipulator(); 
 		metaModelSource.loadMetaModel("metaModel/user_story.ecore" , "USER STORY");
 		
-		//load destination meta model
+		// Chargement du méta modèle de destination
 		MetaModelManipulator metaModelDestination = new MetaModelManipulator(); 
 		metaModelDestination.loadMetaModel("metaModel/bpmn.ecore" ,  "BPMN");
 		
     	try {
     		
-    		//load source model
+    		// Chargement du modèle source
 			DynamicEObjectImpl modelSource =  metaModelSource.loadModel("model/user_story.model");
 			
 			//transformation

@@ -23,6 +23,8 @@ The BPMN Metamodel, a key aspect of this project, provides a standardized and co
 
 
  ![BPMN metamodel ](readme/BPMNMetamodel.jpeg)
+## mapping schema  
+![BPMN metamodel ](readme/MappingRules.jpeg)
 ## transformation demo 
 
 ![Demo](readme/Demo.gif)

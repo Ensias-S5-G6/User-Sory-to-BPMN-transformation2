@@ -16,4 +16,14 @@
     <task xmi:id="_HpOlAKsrEe6mNcrAiKd1Mg" description="Receive the confirmation message"/>
     <value xmi:id="_KVxq0KsrEe6mNcrAiKd1Mg" value="receive the confirmation message"/>
   </userStories>
+  <userStories xmi:id="_ImjOQKs-Ee6WKYAPZ9danQ" next="_-TbTQKsqEe6mNcrAiKd1Mg">
+    <role xmi:id="_JuGsMKs-Ee6WKYAPZ9danQ" roleName="customer2"/>
+    <task xmi:id="_LpXfAKs-Ee6WKYAPZ9danQ" description="tache2"/>
+    <value xmi:id="_M8XX8Ks-Ee6WKYAPZ9danQ" value="value2"/>
+  </userStories>
+  <userStories xmi:id="_cCdNUKs-Ee6WKYAPZ9danQ" id="6" next="_yb-kIKsqEe6mNcrAiKd1Mg">
+    <role xmi:id="_ilD-sKs-Ee6WKYAPZ9danQ" roleName="Customer"/>
+    <task xmi:id="_kVfagKs-Ee6WKYAPZ9danQ" description="taxhe"/>
+    <value xmi:id="_ldqjgKs-Ee6WKYAPZ9danQ" value="value"/>
+  </userStories>
 </UserStory:Backlog>
